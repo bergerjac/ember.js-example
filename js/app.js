@@ -1,19 +1,10 @@
-App = Ember.Application.create(
+console.log("{app.js");
+
+window.App = Ember.Application.create(
     {
         LOG_TRANSITIONS: true
+//        namespace: 'app-emberjs'
     }
 );
 
-App.Router.map(function()
-               {
-                   // put your routes here
-               }
-);
-
-App.IndexRoute = Ember.Route.extend({
-                                        model: function()
-                                        {
-                                            return ['red', 'yellow', 'blue'];
-                                        }
-                                    }
-);
+console.log("}app.js");
