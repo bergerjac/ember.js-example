@@ -25,7 +25,7 @@ Flint.Router.map(
                 this.resource(
                     'contacts', function()
                     {// /contacts/example-contact
-                        this.resource('contact', { path: '/:name' });
+                        this.resource('contact', { path: '/:contact_id' });
                     }
                 );
             }
@@ -35,13 +35,14 @@ Flint.Router.map(
 
 Flint.ApplicationAdapter = DS.FixtureAdapter.extend();
 
-Flint.Product = DS.Model.extend(
+Flint.FlintIndexController = Ember.Controller.extend(
     {
-        title: DS.attr('string'),
-        price: DS.attr('number'),
-        description: DS.attr('string'),
-        isOnSale: DS.attr('boolean'),
-        image: DS.attr('string')
+        productsCount: 6,
+        logo: 'images/logo-small.png',
+        time: function()
+        {
+            return (new Date()).toDateString();
+        }.property()
     }
 );
 
