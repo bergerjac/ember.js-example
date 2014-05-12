@@ -1,164 +1,180 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Flint & Flame</title>
-    <link href="css/bootstrap.css" media="screen" rel="stylesheet"/>
-    <link href="css/main.css" media="screen" rel="stylesheet"/>
-    <link href="css/style.css" media="screen" rel="stylesheet"/>
-    <link href="css/application.css" media="screen" rel="stylesheet"/>
+   <meta charset="utf-8">
+   <title>Flint & Flame</title>
+   <link href="css/bootstrap.css" media="screen" rel="stylesheet"/>
+   <link href="css/main.css" media="screen" rel="stylesheet"/>
+   <link href="css/style.css" media="screen" rel="stylesheet"/>
+   <link href="css/application.css" media="screen" rel="stylesheet"/>
 </head>
 <body>
-<script type='text/x-handlebars' data-template-name='application'>
-    <div class='navbar navbar-default'>
-        <div class='container'>
+   <script type='text/x-handlebars' data-template-name='application'>
+      <div class='navbar navbar-default'>
+         <div class='container'>
             <a href='#' class='navbar-brand'><img src='img/logo.png' alt='logo' height='34' width='224'/></a>
             <ul class='nav navbar-nav navbar-right'>
-                <li>
-                    {{#link-to "index"}}Home{{/link-to}}
-                </li>
-                <li>
-                    {{#link-to "credits" activeClass="active"}}Credits{{/link-to}}
-                </li>
-                <li>
-                    {{#link-to 'products' activeClass="active"}}Products{{/link-to}}
-                </li>
-                <li>{{#link-to 'contacts' activeClass="active"}}Contacts{{/link-to}}</li>
+               <li>
+                  {{#link-to "index"}}Home{{/link-to}}
+               </li>
+               <li>
+                  {{#link-to "about" activeClass="active"}}About{{/link-to}}
+               </li>
+               <li>
+                  {{#link-to 'products' activeClass="active"}}Products{{/link-to}}
+               </li>
+               <li>{{#link-to 'contacts' activeClass="active"}}Contacts{{/link-to}}</li>
             </ul>
-        </div>
-    </div>
-    <div class='container'>
-        {{outlet}}
-    </div>
-    <footer class='container'>
-        <hr/>
-        <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
+         </div>
+      </div>
+      <div class='container'>
+         {{outlet}}
+      </div>
+      <footer class='container'>
+         <hr/>
+         <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
 
-        <p class='pull-right'>
-            {{#link-to "credits"}}Credits{{/link-to}}
-        </p>
-    </footer>
-</script>
+         <p class='pull-right'>
+            {{#link-to "about"}}Credits{{/link-to}}
+         </p>
+      </footer>
+   </script>
 
-<script type='text/x-handlebars' data-template-name='index'>
-    <h1>Welcome to The Flint &amp; Flame!</h1>
-    <img {{bind-attr src='logo'}}/>
-    <p>
-        {{#link-to 'products' class='btn btn-primary btn-lg'}}
-          Browse All {{productsCount}} Items &raquo;
-        {{/link-to}}
-    </p>
+   <script type='text/x-handlebars' data-template-name='index'>
 
-    <p>time: {{time}}</p>
-</script>
+      <div class="jumbotron">
+         <h1>Welcome to The Flint &amp; Flame!</h1>
 
-<script type='text/x-handlebars' data-template-name='products'>
-    <h1>Products</h1>
+         <p class="tagline">
+            <img {{bind-attr src='logo'}} alt='Logo' />
+                 Everything you need to make it through the winter.
+         </p>
 
-    <div class='row'>
-        <div class='col-sm-3'>
-            <div class='list-group'>
-                {{#each}}
-                {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
-                {{/each}}
+         <p>
+            {{#link-to 'products' class='btn btn-primary btn-lg'}}
+            Browse All {{productsCount}} Items &raquo;
+            {{/link-to}}
+         </p>
+
+         <div class='col-sm-4'>
+            <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
+            <div class='col-sm-7'>
+               <h2>{{title}}</h2>
+
+               <p class="product-description">{{description}}</p>
+
+               <p>{{#link-to 'product' this class='btn btn-success'}}
+                  Buy for ${{price}}{{/link-to}}</p>
             </div>
-        </div>
-        <div class='col-sm-9' style="border-thickness=1">
+         </div>
+
+      </div>
+   </script>
+
+   <script type='text/x-handlebars' data-template-name='products'>
+      <h1>Products</h1>
+
+      <div class='row'>
+         <div class='col-sm-3'>
+            <div class='list-group'>
+               {{#each}}
+               {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
+               {{/each}}
+            </div>
+         </div>
+         <div class='col-sm-9' style="border-thickness=1">
             {{outlet}}
-        </div>
-    </div>
-</script>
-<script type="text/x-handlebars" data-template-name='products/index'>
-    <p>Choose a product from the left...</p>
-</script>
-<script type='text/x-handlebars' data-template-name='product'>
-    <div class="row">
-        <div class="col-md-5">
+         </div>
+      </div>
+   </script>
+   <script type="text/x-handlebars" data-template-name='products/index'>
+      <p>Choose a product from the left...</p>
+   </script>
+   <script type='text/x-handlebars' data-template-name='product'>
+      <div class="row">
+         <div class="col-md-5">
             <h2>{{title}}</h2>
 
             <p>{{description}}</p>
 
             <p>Buy for ${{price}}</p>
-        </div>
-        <div class="col-md-2">
+         </div>
+         <div class="col-md-2">
             <p>Crafter: {{#link-to 'contact' crafter}}{{crafter.name}}{{/link-to}}</p>
-        </div>
-        <div class="col-md-3">
+         </div>
+         <div class="col-md-3">
             <h3>Reviews</h3>
             <ul>
-                {{#each review in reviews }}
-                    <li>{{review.text}}</li>
-                {{else}}
-                    <li>
-                        <p class='text-muted'>
-                            <em>No reviews yet. Be the first to write one!</em>
-                        </p>
-                    </li>
-                {{/each}}
+               {{#each review in reviews }}
+               <li>{{review.text}}</li>
+               {{else}}
+               <li>
+                  <p class='text-muted'>
+                     <em>No reviews yet. Be the first to write one!</em>
+                  </p>
+               </li>
+               {{/each}}
             </ul>
-        </div>
-        <div class='col-md-2'>
+         </div>
+         <div class='col-md-2'>
             <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
-        </div>
-    </div>
-</script>
+         </div>
+      </div>
+   </script>
 
-<script type='text/x-handlebars' data-template-name='contacts/index'>
-    <h1>About</h1>
+   <script type='text/x-handlebars' data-template-name='contacts/index'>
+      <h1>About</h1>
 
-    <p>{{contactName}}</p>
-    <img {{bind-attr src='avatar'}}/>
-    <p>{{open}}</p>
-</script>
-<script type='text/x-handlebars' data-template-name='contacts'>
-    <h1>Contacts</h1>
+      <p>{{contactName}}</p>
+      <img {{bind-attr src='avatar'}}/>
+      <p>{{open}}</p>
+   </script>
+   <script type='text/x-handlebars' data-template-name='contacts'>
+      <h1>Contacts</h1>
 
-    <div class='row'>
-        <div class='col-sm-9'>
+      <div class='row'>
+         <div class='col-sm-9'>
             {{outlet}}
-        </div>
-        <div class='col-sm-3'>
+         </div>
+         <div class='col-sm-3'>
             <div class='list-group'>
-                {{#each}}
-                {{#link-to 'contact' this classNames='list-group-item'}}
-                {{name}}
-                {{/link-to}}
-                {{/each}}
+               {{#each}}
+               {{#link-to 'contact' this classNames='list-group-item'}}
+               {{name}}
+               {{/link-to}}
+               {{/each}}
             </div>
-        </div>
-    </div>
-</script>
-<script type='text/x-handlebars' data-template-name='contact'>
-    <div class="row">
-        <div class="col-md-7">
+         </div>
+      </div>
+   </script>
+   <script type='text/x-handlebars' data-template-name='contact'>
+      <div class="row">
+         <div class="col-md-7">
             <h2>{{name}}</h2>
+
             <p>{{about}}</p>
-        </div>
-        <div class="col-md-3">
+         </div>
+         <div class="col-md-3">
             <h3>Products</h3>
             <ul>
-                {{#each product in products }}
-                    <li>{{#link-to 'product' product}}{{product.title}}{{/link-to}}</li>
-                {{/each}}
+               {{#each product in products }}
+               <li>{{#link-to 'product' product}}{{product.title}}{{/link-to}}</li>
+               {{/each}}
             </ul>
-        </div>
-        <div class='col-md-2'>
+         </div>
+         <div class='col-md-2'>
             <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
-        </div>
-    </div>
-</script>
+         </div>
+      </div>
+   </script>
 
-<script type='text/x-handlebars' data-template-name='credits'>
-    <h1>Credits..</h1>
-</script>
-
-<script src="js/vendor/jquery-1.10.2.js"></script>
-<script src="js/vendor/handlebars-1.0.0.js"></script>
-<script src="js/vendor/ember-1.3.0.js"></script>
-<script src="js/vendor/ember-data-1.0.0-beta.5.js"></script>
-<script src="js/app.js"></script>
-<script src="js/products.js"></script>
-<script src="js/contacts.js"></script>
+   <script src="js/vendor/jquery-1.10.2.js"></script>
+   <script src="js/vendor/handlebars-1.0.0.js"></script>
+   <script src="js/vendor/ember-1.3.0.js"></script>
+   <script src="js/vendor/ember-data-1.0.0-beta.5.js"></script>
+   <script src="js/app.js"></script>
+   <script src="js/products.js"></script>
+   <script src="js/contacts.js"></script>
 
 </body>
 </html>
