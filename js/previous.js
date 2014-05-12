@@ -11,22 +11,6 @@ Flint.FlintIndexController = Ember.Controller.extend(
     }
 );
 
-Flint.FlintAboutController = Ember.Controller.extend(
-    {
-        contactName: "Harry Potter",
-        avatar: 'images/avatar.png',
-        open: function()
-        {
-            var day = (new Date()).getDay();
-            if (day === 0)
-            {
-                return "closed on sundays";
-            }
-            return "open";
-
-        }.property()
-    }
-);
 Flint.PRODUCTS = [
     {
         title: 'Flint',
@@ -51,29 +35,6 @@ Flint.ProductsRoute = Ember.Route.extend(
         }
     }
 );
-
-Flint.ContactsRoute = Ember.Route.extend(
-    {
-        model: function()
-        {
-            return Flint.CONTACTS;
-        }
-    }
-);
-
-Flint.CONTACTS = [
-    {
-        name: "gia mia",
-        avatar: 'images/contacts/giamia.png',
-        about: "this girl"
-    },
-    {
-        name: "helo there",
-        avatar: 'images/contacts/anostagia.png',
-        about: "that girl 2"
-    }
-];
-
 Flint.ProductRoute = Ember.Route.extend(
     {
         model: function(routeParams)
@@ -86,6 +47,44 @@ Flint.ProductRoute = Ember.Route.extend(
     }
 );
 
+
+Flint.ContactsIndexController = Ember.Controller.extend(
+    {
+        contactName: "Harry Potter",
+        avatar: 'images/contacts/patty.png',
+        open: function()
+        {
+            var day = (new Date()).getDay();
+            if (day === 0)
+            {
+                return "closed on sundays";
+            }
+            return "open";
+
+        }.property()
+    }
+);
+Flint.ContactsRoute = Ember.Route.extend(
+    {
+        model: function()
+        {
+            return Flint.CONTACTS;
+        }
+    }
+);
+
+Flint.CONTACTS = [
+    {
+        name: "gia mia",
+        avatar: 'images/contacts/adam.png',
+        about: "this girl"
+    },
+    {
+        name: "helo there",
+        avatar: 'images/contacts/martin.png',
+        about: "that girl 2"
+    }
+];
 Flint.ContactRoute = Ember.Route.extend(
     {
         model: function(routeParams)
@@ -95,3 +94,5 @@ Flint.ContactRoute = Ember.Route.extend(
         }
     }
 );
+
+

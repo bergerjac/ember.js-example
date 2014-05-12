@@ -15,7 +15,6 @@ Flint.Router.map(
             { path: '/' },
             function()
             {
-                this.route('about');
                 this.route('credits', { path: '/thank-you' });
                 this.resource(
                     'products', function()
@@ -23,8 +22,12 @@ Flint.Router.map(
                         this.resource('product', { path: '/:title' });
                     }
                 );
-                this.resource('contacts');
-                this.resource('contact', { path: '/contacts/:name' });
+                this.resource(
+                    'contacts', function()
+                    {// /contacts/example-contact
+                        this.resource('contact', { path: '/:name' });
+                    }
+                );
             }
         );
     }
