@@ -10,24 +10,17 @@ window.Flint = Ember.Application.create(
 Flint.Router.map(
     function()
     {
+        this.route('credits', { path: '/thank-you' });
         this.resource(
-            'flint',
-            { path: '/' },
-            function()
-            {
-                this.route('credits', { path: '/thank-you' });
-                this.resource(
-                    'products', function()
-                    {// /products/example-product
-                        this.resource('product', { path: '/:product_id' });
-                    }
-                );
-                this.resource(
-                    'contacts', function()
-                    {// /contacts/example-contact
-                        this.resource('contact', { path: '/:contact_id' });
-                    }
-                );
+            'products', function()
+            {// /products/example-product
+                this.resource('product', { path: '/:product_id' });
+            }
+        );
+        this.resource(
+            'contacts', function()
+            {// /contacts/example-contact
+                this.resource('contact', { path: '/:contact_id' });
             }
         );
     }
@@ -35,14 +28,23 @@ Flint.Router.map(
 
 Flint.ApplicationAdapter = DS.FixtureAdapter.extend();
 
-Flint.FlintIndexController = Ember.Controller.extend(
+Flint.IndexController = Ember.ArrayController.extend(
     {
-        productsCount: 6,
+        productsCount: Ember.computed.alias('length'),
         logo: 'images/logo-small.png',
         time: function()
         {
             return (new Date()).toDateString();
         }.property()
+    }
+);
+
+Flint.IndexRoute = Ember.Route.extend(
+    {
+        model: function()
+        {
+            return this.store.findAll('product');
+        }
     }
 );
 

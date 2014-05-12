@@ -9,16 +9,16 @@
     <link href="css/application.css" media="screen" rel="stylesheet"/>
 </head>
 <body>
-<script type='text/x-handlebars' data-template-name='flint'>
+<script type='text/x-handlebars' data-template-name='application'>
     <div class='navbar navbar-default'>
         <div class='container'>
             <a href='#' class='navbar-brand'><img src='img/logo.png' alt='logo' height='34' width='224'/></a>
             <ul class='nav navbar-nav navbar-right'>
                 <li>
-                    {{#link-to "flint.index"}}Home{{/link-to}}
+                    {{#link-to "index"}}Home{{/link-to}}
                 </li>
                 <li>
-                    {{#link-to "flint.credits" activeClass="active"}}Credits{{/link-to}}
+                    {{#link-to "credits" activeClass="active"}}Credits{{/link-to}}
                 </li>
                 <li>
                     {{#link-to 'products' activeClass="active"}}Products{{/link-to}}
@@ -35,12 +35,12 @@
         <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
 
         <p class='pull-right'>
-            {{#link-to "flint.credits"}}Credits{{/link-to}}
+            {{#link-to "credits"}}Credits{{/link-to}}
         </p>
     </footer>
 </script>
 
-<script type='text/x-handlebars' data-template-name='flint/index'>
+<script type='text/x-handlebars' data-template-name='index'>
     <h1>Welcome to The Flint &amp; Flame!</h1>
     <img {{bind-attr src='logo'}}/>
     <p>
@@ -148,7 +148,7 @@
     </div>
 </script>
 
-<script type='text/x-handlebars' data-template-name='flint/credits'>
+<script type='text/x-handlebars' data-template-name='credits'>
     <h1>Credits..</h1>
 </script>
 
