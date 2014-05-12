@@ -20,22 +20,21 @@ Flint.Router.map(
                 this.resource('products');
                 this.resource('product', { path: '/products/:title' });
                 this.resource('contacts');
+                this.resource('contact', { path: '/contacts/:name' });
             }
         );
     }
 );
 
-Flint.ProductRoute = Ember.Route.extend(
+Flint.ContactRoute = Ember.Route.extend(
     {
         model: function(routeParams)
         {
             console.log(routeParams.title);
-            var product = Flint.PRODUCTS.findBy('title', routeParams.title);
-            console.log(product);
-
-            return  product;
+            return  Flint.CONTACTS.findBy('name', routeParams.name);
         }
     }
 );
+
 
 console.log("}app.js");

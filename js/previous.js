@@ -68,8 +68,20 @@ Flint.CONTACTS = [
         about: "this girl"
     },
     {
-        name: "gia mia",
+        name: "helo there",
         avatar: 'images/contacts/anostagia.png',
-        about: "this girl"
+        about: "that girl 2"
     }
 ];
+
+Flint.ProductRoute = Ember.Route.extend(
+    {
+        model: function(routeParams)
+        {
+            console.log(routeParams.title);
+            var product = Flint.PRODUCTS.findBy('title', routeParams.title);
+            console.log(product);
+            return  product;
+        }
+    }
+);

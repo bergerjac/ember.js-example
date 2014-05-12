@@ -78,17 +78,26 @@
 </div>
 </script>
 
+
+
 <script type='text/x-handlebars' data-template-name='contacts'>
     <h1>Contacts</h1>
     {{#each}}
         <li class='row'>
-            <img {{bind-attr src='avatar'}} class='img-thumbnail col-md-5'/>
+            <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail col-md-5'/>
             <div class='col-md-7'>
-                <h2>{{name}}</h2>
+                <h2>{{#link-to 'contact' this }}{{name}}{{/link-to}}</h2>
                 <p class='product-description'>{{about}}</p>
             </div>
         </li>
     {{/each}}
+</script>
+<script type='text/x-handlebars' data-template-name='contact'>
+<h2>{{name}}</h2>
+<p>{{about}}</p>
+<div class='col-md-5'>
+    <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
+</div>
 </script>
 
 <script type='text/x-handlebars' data-template-name='flint/credits'>
