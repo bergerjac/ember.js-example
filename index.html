@@ -14,19 +14,19 @@
             <a href='#' class='navbar-brand'><img src='img/logo.png' alt='logo' height='34' width='224'/></a>
             <ul class='nav navbar-nav navbar-right'>
                 <li>
-                  {{#link-to "flint.index"}}Home{{/link-to}}
+                    {{#link-to "flint.index"}}Home{{/link-to}}
                 </li>
                 <li>
-                  {{#link-to "flint.about" activeClass="active"}}About{{/link-to}}
+                    {{#link-to "flint.about" activeClass="active"}}About{{/link-to}}
                 </li>
                 <li>
-                  {{#link-to "flint.credits" activeClass="active"}}Credits{{/link-to}}
+                    {{#link-to "flint.credits" activeClass="active"}}Credits{{/link-to}}
                 </li>
                 <li>
                     {{#link-to 'products' activeClass="active"}}Products{{/link-to}}
                 </li>
                 <li>{{#link-to 'contacts' activeClass="active"}}Contacts{{/link-to}}</li>
-</ul>
+            </ul>
         </div>
     </div>
     <div class='container'>
@@ -46,11 +46,13 @@
     <h1>Welcome to The Flint &amp; Flame!</h1>
     <img {{bind-attr src='logo'}}/>
     <p>products: {{productsCount}}</p>
+
     <p>time: {{time}}</p>
 </script>
 
 <script type='text/x-handlebars' data-template-name='flint/about'>
     <h1>About</h1>
+
     <p>{{contactName}}</p>
     <img {{bind-attr src='avatar'}}/>
     <p>{{open}}</p>
@@ -58,46 +60,59 @@
 
 <script type='text/x-handlebars' data-template-name='products'>
     <h1>Products</h1>
-    {{#each}}
-        <li class='row'>
-            <img {{bind-attr src='image'}} class='img-thumbnail col-md-5'/>
-            <div class='col-md-7'>
-                <h2>{{title}}</h2>
-                <p class='product-description'>{{description}}</p>
-                <p>{{#link-to 'product' this tagName='button' classNames='btn btn-success'}}{{title}}{{/link-to}}</p>
+
+    <div class='row'>
+        <div class='col-sm-3'>
+            <div class='list-group'>
+                {{#each}}
+                    {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
+                {{/each}}
             </div>
-        </li>
-    {{/each}}
+        </div>
+        <div class='col-sm-9' style="border-thickness=1">
+            {{outlet}}
+        </div>
+    </div>
+</script>
+<script type="text/x-handlebars" data-template-name='products/index'>
+    <p>Choose a product from the left...</p>
 </script>
 <script type='text/x-handlebars' data-template-name='product'>
-<h2>{{title}}</h2>
-<p>{{description}}</p>
-<p>Buy for ${{price}}</p>
-<div class='col-md-5'>
-    <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
-</div>
+    <div class="row">
+        <div class="col-md-7">
+                <h2>{{title}}</h2>
+
+            <p>{{description}}</p>
+
+            <p>Buy for ${{price}}</p>
+        </div>
+        <div class='col-md-5'>
+            <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+        </div>
+    </div>
 </script>
-
-
 
 <script type='text/x-handlebars' data-template-name='contacts'>
     <h1>Contacts</h1>
     {{#each}}
-        <li class='row'>
-            <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail col-md-5'/>
-            <div class='col-md-7'>
-                <h2>{{#link-to 'contact' this }}{{name}}{{/link-to}}</h2>
-                <p class='product-description'>{{about}}</p>
-            </div>
-        </li>
+    <li class='row'>
+        <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail col-md-5'/>
+        <div class='col-md-7'>
+            <h2>{{#link-to 'contact' this }}{{name}}{{/link-to}}</h2>
+
+            <p class='product-description'>{{about}}</p>
+        </div>
+    </li>
     {{/each}}
 </script>
 <script type='text/x-handlebars' data-template-name='contact'>
-<h2>{{name}}</h2>
-<p>{{about}}</p>
-<div class='col-md-5'>
-    <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
-</div>
+    <h2>{{name}}</h2>
+
+    <p>{{about}}</p>
+
+    <div class='col-md-5'>
+        <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
+    </div>
 </script>
 
 <script type='text/x-handlebars' data-template-name='flint/credits'>

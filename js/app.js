@@ -17,24 +17,17 @@ Flint.Router.map(
             {
                 this.route('about');
                 this.route('credits', { path: '/thank-you' });
-                this.resource('products');
-                this.resource('product', { path: '/products/:title' });
+                this.resource(
+                    'products', function()
+                    {// /products/example-product
+                        this.resource('product', { path: '/:title' });
+                    }
+                );
                 this.resource('contacts');
                 this.resource('contact', { path: '/contacts/:name' });
             }
         );
     }
 );
-
-Flint.ContactRoute = Ember.Route.extend(
-    {
-        model: function(routeParams)
-        {
-            console.log(routeParams.title);
-            return  Flint.CONTACTS.findBy('name', routeParams.name);
-        }
-    }
-);
-
 
 console.log("}app.js");

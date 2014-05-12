@@ -33,14 +33,14 @@ Flint.PRODUCTS = [
         price: 99,
         description: 'Flint is…',
         isOnSale: true,
-        image: 'flint.png'
+        image: 'images/products/flint.png'
     },
     {
         title: 'Kindling',
         price: 249,
         description: 'Easily…',
         isOnSale: false,
-        image: 'kindling.png'
+        image: 'images/products/kindling.png'
     }
 ];
 Flint.ProductsRoute = Ember.Route.extend(
@@ -82,6 +82,16 @@ Flint.ProductRoute = Ember.Route.extend(
             var product = Flint.PRODUCTS.findBy('title', routeParams.title);
             console.log(product);
             return  product;
+        }
+    }
+);
+
+Flint.ContactRoute = Ember.Route.extend(
+    {
+        model: function(routeParams)
+        {
+            console.log(routeParams.title);
+            return  Flint.CONTACTS.findBy('name', routeParams.name);
         }
     }
 );
