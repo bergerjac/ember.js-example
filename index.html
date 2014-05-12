@@ -64,11 +64,20 @@
             <div class='col-md-7'>
                 <h2>{{title}}</h2>
                 <p class='product-description'>{{description}}</p>
-                <p><button class='btn btn-success'>Buy for ${{price}}</button></p>
+                <p>{{#link-to 'product' this tagName='button' classNames='btn btn-success'}}{{title}}{{/link-to}}</p>
             </div>
         </li>
     {{/each}}
 </script>
+<script type='text/x-handlebars' data-template-name='product'>
+<h2>{{title}}</h2>
+<p>{{description}}</p>
+<p>Buy for ${{price}}</p>
+<div class='col-md-5'>
+    <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+</div>
+</script>
+
 <script type='text/x-handlebars' data-template-name='contacts'>
     <h1>Contacts</h1>
     {{#each}}
@@ -92,6 +101,7 @@
 <script src="js/vendor/ember-data-1.0.0-beta.5.js"></script>
 <script src="js/app.js"></script>
 <script src="js/router.js"></script>
+<script src="js/previous.js"></script>
 
 </body>
 </html>
