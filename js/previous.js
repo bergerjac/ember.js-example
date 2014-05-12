@@ -11,8 +11,9 @@ Flint.FlintIndexController = Ember.Controller.extend(
     }
 );
 
-Flint.PRODUCTS = [
+Flint.Product.FIXTURES = [
     {
+        id: 1,
         title: 'Flint',
         price: 99,
         description: 'Flint is…',
@@ -20,6 +21,7 @@ Flint.PRODUCTS = [
         image: 'images/products/flint.png'
     },
     {
+        id: 2,
         title: 'Kindling',
         price: 249,
         description: 'Easily…',
@@ -31,7 +33,7 @@ Flint.ProductsRoute = Ember.Route.extend(
     {
         model: function()
         {
-            return  Flint.PRODUCTS
+            return this.store.findAll('product');
         }
     }
 );
@@ -40,13 +42,10 @@ Flint.ProductRoute = Ember.Route.extend(
         model: function(routeParams)
         {
             console.log(routeParams.title);
-            var product = Flint.PRODUCTS.findBy('title', routeParams.title);
-            console.log(product);
-            return  product;
+            return  this.store.find('product', routeParams.product_id);
         }
     }
 );
-
 
 Flint.ContactsIndexController = Ember.Controller.extend(
     {

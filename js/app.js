@@ -19,7 +19,7 @@ Flint.Router.map(
                 this.resource(
                     'products', function()
                     {// /products/example-product
-                        this.resource('product', { path: '/:title' });
+                        this.resource('product', { path: '/:product_id' });
                     }
                 );
                 this.resource(
@@ -30,6 +30,18 @@ Flint.Router.map(
                 );
             }
         );
+    }
+);
+
+Flint.ApplicationAdapter = DS.FixtureAdapter.extend();
+
+Flint.Product = DS.Model.extend(
+    {
+        title: DS.attr('string'),
+        price: DS.attr('number'),
+        description: DS.attr('string'),
+        isOnSale: DS.attr('boolean'),
+        image: DS.attr('string')
     }
 );
 
