@@ -43,7 +43,11 @@
 <script type='text/x-handlebars' data-template-name='flint/index'>
     <h1>Welcome to The Flint &amp; Flame!</h1>
     <img {{bind-attr src='logo'}}/>
-    <p>products: {{productsCount}}</p>
+    <p>
+        {{#link-to 'products' class='btn btn-primary btn-lg'}}
+          Browse All {{productsCount}} Items &raquo;
+        {{/link-to}}
+    </p>
 
     <p>time: {{time}}</p>
 </script>

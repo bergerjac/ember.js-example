@@ -47,7 +47,7 @@ Flint.ProductsRoute = Ember.Route.extend(
     {
         model: function()
         {
-            return this.store.findAll('product');
+            return this.store.find('product', { order: 'title' });
         }
     }
 );
@@ -58,5 +58,11 @@ Flint.ProductRoute = Ember.Route.extend(
             console.log(routeParams.title);
             return  this.store.find('product', routeParams.product_id);
         }
+    }
+);
+
+Flint.ProductsController = Ember.ArrayController.extend(
+    {
+        sortProperties: ['title']
     }
 );
