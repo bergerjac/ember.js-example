@@ -69,12 +69,15 @@
 </script>
 <script type='text/x-handlebars' data-template-name='product'>
     <div class="row">
-        <div class="col-md-7">
+        <div class="col-md-5">
             <h2>{{title}}</h2>
 
             <p>{{description}}</p>
 
             <p>Buy for ${{price}}</p>
+        </div>
+        <div class="col-md-2">
+            <p>Crafter: {{#link-to 'contact' crafter}}{{crafter.name}}{{/link-to}}</p>
         </div>
         <div class="col-md-3">
             <h3>Reviews</h3>
@@ -122,12 +125,22 @@
     </div>
 </script>
 <script type='text/x-handlebars' data-template-name='contact'>
-    <h2>{{name}}</h2>
-
-    <p>{{about}}</p>
-
-    <div class='col-md-5'>
-        <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
+    <div class="row">
+        <div class="col-md-7">
+            <h2>{{name}}</h2>
+            <p>{{about}}</p>
+        </div>
+        <div class="col-md-3">
+            <h3>Products</h3>
+            <ul>
+                {{#each product in products }}
+                    <li>{{#link-to 'product' product}}{{product.title}}{{/link-to}}</li>
+                {{/each}}
+            </ul>
+        </div>
+        <div class='col-md-2'>
+            <img {{bind-attr src='avatar'}} {{bind-attr alt='name'}} class='img-thumbnail img-rounded'/>
+        </div>
     </div>
 </script>
 

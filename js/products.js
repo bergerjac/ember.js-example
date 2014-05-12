@@ -5,7 +5,8 @@ Flint.Product = DS.Model.extend(
         description: DS.attr('string'),
         isOnSale: DS.attr('boolean'),
         image: DS.attr('string'),
-        reviews: DS.hasMany('review', { async: true })
+        reviews: DS.hasMany('review', { async: true }),
+        crafter: DS.belongsTo('contact', { async: true })
     }
 );
 
@@ -29,7 +30,8 @@ Flint.Product.FIXTURES = [
         description: 'Flint is…',
         isOnSale: true,
         image: 'images/products/flint.png',
-        reviews: [100, 101]
+        reviews: [100, 101],
+        crafter: 1
     },
     {
         id: 2,
@@ -37,7 +39,8 @@ Flint.Product.FIXTURES = [
         price: 249,
         description: 'Easily…',
         isOnSale: false,
-        image: 'images/products/kindling.png'
+        image: 'images/products/kindling.png',
+        crafter: 2
     }
 ];
 Flint.ProductsRoute = Ember.Route.extend(
