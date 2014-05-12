@@ -1,3 +1,5 @@
+
+
 Flint.Product = DS.Model.extend(
     {
         title: DS.attr('string'),
@@ -9,18 +11,6 @@ Flint.Product = DS.Model.extend(
         crafter: DS.belongsTo('contact', { async: true })
     }
 );
-
-Flint.Review = DS.Model.extend(
-    {
-        text: DS.attr('string'),
-        reviewedAt: DS.attr('number'),
-        product: DS.belongsTo('product')
-    }
-);
-Flint.Review.FIXTURES = [
-    { id: 100, product: 1, text: "Started a fire in no time!"},
-    { id: 101, product: 1, text: "Not the brightest flame, but warm!"}
-];
 
 Flint.Product.FIXTURES = [
     {
@@ -43,14 +33,6 @@ Flint.Product.FIXTURES = [
         crafter: 2
     }
 ];
-Flint.ProductsRoute = Ember.Route.extend(
-    {
-        model: function()
-        {
-            return this.store.find('product', { order: 'title' });
-        }
-    }
-);
 Flint.ProductRoute = Ember.Route.extend(
     {
         model: function(routeParams)
@@ -61,8 +43,30 @@ Flint.ProductRoute = Ember.Route.extend(
     }
 );
 
+
+Flint.ProductsRoute = Ember.Route.extend(
+    {
+        model: function()
+        {
+            return this.store.find('product', { order: 'title' });
+        }
+    }
+);
 Flint.ProductsController = Ember.ArrayController.extend(
     {
         sortProperties: ['title']
     }
 );
+
+Flint.Review = DS.Model.extend(
+    {
+        text: DS.attr('string'),
+        reviewedAt: DS.attr('number'),
+        product: DS.belongsTo('product')
+    }
+);
+Flint.Review.FIXTURES = [
+    { id: 100, product: 1, text: "Started a fire in no time!"},
+    { id: 101, product: 1, text: "Not the brightest flame, but warm!"}
+];
+

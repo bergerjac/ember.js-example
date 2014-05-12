@@ -1,0 +1,54 @@
+{
+    "products": [
+        {
+            "id": 0,
+            "title": "dolor",
+            "price": "3",
+            "description": "eiusmod reprehenderit occaecat nostrud sunt dolore irure consectetur ut in labore fugiat quis dolore sit enim Lorem eu ipsum Duis proident, cillum dolore",
+            "isOnSale": true,
+            "image": null,
+            "reviews": null,
+            "crafter": null
+        },
+        {
+            "id": 1,
+            "title": "mollit",
+            "price": "1",
+            "description": "consequat.",
+            "isOnSale": false,
+            "image": null,
+            "reviews": null,
+            "crafter": null
+        },
+        {
+            "id": 2,
+            "title": "quis",
+            "price": "7",
+            "description": "Duis deserunt tempor aliqua. consequat. aliqua. ex eu aliqua. aliqua. et voluptate Duis amet, in cillum aliquip nostrud consectetur elit, veniam, ea ut ea sit ea",
+            "isOnSale": false,
+            "image": null,
+            "reviews": null,
+            "crafter": null
+        },
+        {
+            "id": 3,
+            "title": "minim",
+            "price": "3",
+            "description": "aute deserunt pariatur. eiusmod sunt velit ut est exercitation irure dolor irure ut nostrud amet, laborum aute eu quis veniam, dolore aute non commodo in anim ad dolore commodo irure anim qui esse",
+            "isOnSale": true,
+            "image": null,
+            "reviews": null,
+            "crafter": null
+        },
+        {
+            "id": 4,
+            "title": "dolore",
+            "price": "0",
+            "description": "nulla qui velit minim Lorem adipisicing eu nostrud cupidatat Ut occaecat laboris ad non cupidatat ex",
+            "isOnSale": false,
+            "image": null,
+            "reviews": null,
+            "crafter": null
+        }
+    ]
+}
