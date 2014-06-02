@@ -56,6 +56,9 @@
             {{/link-to}}
          </p>
 
+      </div>
+      <div class="row">
+         {{#each onSale}}
          <div class='col-sm-4'>
             <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
             <div class='col-sm-7'>
@@ -67,7 +70,7 @@
                   Buy for ${{price}}{{/link-to}}</p>
             </div>
          </div>
-
+         {{/each}}
       </div>
    </script>
 
