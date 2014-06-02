@@ -27,6 +27,14 @@
    text-decoration : none;
 }
 
+.product .is-on-sale {
+   background-color : #ca691c;
+}
+.product .is-on-sale[href]:hover,
+.product .is-on-sale[href]:focus {
+   background-color : #9d5216;
+}
+
 .product-detail.row {
    margin        : 1em 0;
    border-bottom : 1px solid #eee;
@@ -42,6 +50,15 @@
 .product-description {
    margin-top : 10px;
 }
+
+.product-detail .is-on-sale {
+   background-color : #ca691c;
+}
+.product-detail .is-on-sale[href]:hover,
+.product-detail .is-on-sale[href]:focus {
+   background-color : #9d5216;
+}
+
 
 .product-detail .read-reviews {
    background-color : rgb(192, 203, 174);

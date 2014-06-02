@@ -180,13 +180,6 @@ App.ContactDetailsComponent = Ember.Component.extend(
     }
 );
 
-App.ProductView = Ember.View.extend(
-    {
-        isOnSale: Ember.computed.alias('controller.isOnSale'),
-        classNameBindings: ['isOnSale']
-    }
-);
-
 App.ApplicationAdapter = DS.RESTAdapter.extend();
 App.Product = DS.Model.extend(
     {
