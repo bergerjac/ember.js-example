@@ -27,6 +27,11 @@
    text-decoration : none;
 }
 
+.product .price {
+   font-size : 1.8em;
+   color     : #009e00;
+}
+
 .product .is-on-sale {
    background-color : #ca691c;
 }
@@ -58,7 +63,6 @@
 .product-detail .is-on-sale[href]:focus {
    background-color : #9d5216;
 }
-
 
 .product-detail .read-reviews {
    background-color : rgb(192, 203, 174);
