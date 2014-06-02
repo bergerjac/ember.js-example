@@ -37,10 +37,15 @@
 }
 .product-detail h2 {
    margin-top    : 0;
-   margin-bottom : 0px;
+   margin-bottom : 0;
 }
 .product-description {
    margin-top : 10px;
+}
+
+.product-detail .read-reviews {
+   background-color : rgb(192, 203, 174);
+   display          : inline-block;
 }
 
 .list-rating {
@@ -106,7 +111,7 @@ h2 {
 .reviews li.read-more .expand {
    width      : 100%;
    position   : absolute;
-   bottom     : 0px;
+   bottom     : 0;
    height     : 25px;
    text-align : center;
 }

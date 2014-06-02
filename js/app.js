@@ -107,6 +107,14 @@ App.ProductController = Ember.ObjectController.extend(
     }
 );
 
+App.IndexRoute = Ember.Route.extend(
+    {
+        model: function()
+        {
+            return this.store.findAll('product');
+        }
+    }
+);
 App.ProductsRoute = Ember.Route.extend(
     {
         model: function()
@@ -120,14 +128,6 @@ App.ContactsRoute = Ember.Route.extend(
         model: function()
         {
             return this.store.findAll('contact');
-        }
-    }
-);
-App.IndexRoute = Ember.Route.extend(
-    {
-        model: function()
-        {
-            return this.store.findAll('product');
         }
     }
 );
@@ -226,13 +226,3 @@ App.Review = DS.Model.extend(
         product: DS.belongsTo('product')
     }
 );
-App.Review.FIXTURES = [
-    {
-        id: 100,
-        text: "Started a fire in no time!"
-    },
-    {
-        id: 101,
-        text: "Not the brightest flame, but warm!"
-    }
-];
