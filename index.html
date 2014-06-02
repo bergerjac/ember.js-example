@@ -59,22 +59,7 @@
       </div>
       <div class="row">
          {{#each onSale}}
-         <div class='col-sm-4'>
-            <div class="row">
-               <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
-               <div class='col-sm-7'>
-                  <h2>{{title}}</h2>
-                  <span class="label label-warning">
-                  {{#link-to 'products.onsale'}}On Sale{{/link-to}}
-                  </span>
-
-                  <p class="product-description">{{description}}</p>
-
-                  <p>{{#link-to 'product' this class='btn btn-success'}}
-                     Buy for ${{price}}{{/link-to}}</p>
-               </div>
-            </div>
-         </div>
+            {{product-details product=this classNames='col-sm-4'}}
          {{/each}}
       </div>
    </script>
@@ -102,18 +87,7 @@
       <ul class='list-unstyled'>
          {{#each}}
          <li class='row'>
-            <img {{bind-attr src='image'}} class='img-thumbnail col-sm-5'/>
-               <div class='col-sm-7'>
-                  <h2>{{title}}</h2>
-                  <span class="label label-warning">
-                  {{#link-to 'products.onsale'}}On Sale{{/link-to}}
-                  </span>
-
-                  <p class="product-description">{{description}}</p>
-
-                  <p>{{#link-to 'product' this class='btn btn-success'}}
-                     Buy for ${{price}}{{/link-to}}</p>
-               </div>
+            {{product-details product=this tagName='li' classNames='row'}}
          </li>
          {{/each}}
       </ul>
@@ -146,6 +120,24 @@
          </div>
          <div class='col-md-2'>
             <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+         </div>
+      </div>
+   </script>
+   <script type='text/x-handlebars' data-template-name='components/product-details'>
+      <div>
+         <div class="row">
+            <img {{bind-attr src='product.image'}} class='img-thumbnail col-sm-5'/>
+            <div class='col-sm-7'>
+               <h2>{{product.title}}</h2>
+                  <span class="label label-warning">
+                  {{#link-to 'products.onsale'}}On Sale{{/link-to}}
+                  </span>
+
+               <p class="product-description">{{product.description}}</p>
+
+               <p>{{#link-to 'product' product class='btn btn-success'}}
+                  Buy for ${{product.price}}{{/link-to}}</p>
+            </div>
          </div>
       </div>
    </script>
