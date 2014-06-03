@@ -109,6 +109,16 @@
          <div>
             {{render 'reviews' reviews}}
          </div>
+         {{#if isNotReviewed}}
+         <div class="new-review">
+            <h3>Review {{title}}</h3>
+            {{#if text}}
+            <p class='text-muted'>{{review.text}}</p>
+            {{/if}}
+            {{textarea valueBinding='review.text'}}
+            <button {{action 'createReview'}} class='btn-primary'>Review</button>
+         </div>
+         {{/if}}
       </div>
 
       <div class='col-md-5'>

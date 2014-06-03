@@ -79,7 +79,7 @@ App.ProductController = Ember.ObjectController.extend(
                     product: this.get('model')
                 }
             );
-        }.property('model'),
+        }.property('model'),// on model changed
         ratings: [1, 2, 3, 4, 5],
         selectedRating: 5,
         actions: {
@@ -88,13 +88,8 @@ App.ProductController = Ember.ObjectController.extend(
                 var controller = this;
                 var review = this.get('review');
                 review.set('reviewedAt', new Date());
-                review.get('review').save().then(
-                    function()
-                    {
-                        controller.set('text', '');
-                        controller.get('model.reviews').addObject(review);
-                    }
-                );
+                controller.set('text', '');
+                controller.get('model.reviews').addObject(review);
             },
             createRating: function()
             {
