@@ -28,14 +28,21 @@ gulp.task(
                     'ln ./data/contacts.json contacts --force',
                     'ln ./data/reviews.json reviews --force',
 
-                    'echo serving files...',
-                    // serve
-                    'python -m SimpleHTTPServer 8080',
-                    'echo init done.'
+                    'echo serve the files via: "python -m SimpleHTTPServer 8080"'
                 ])
             );
-        //        gulp.src('node_modules/markdown/lib/markdown.js')
-        //            .pipe(symlink('./js/vendor/markdown.js'))
-        //            .on('error', gutil.log);
+    }
+);
+
+gulp.task(
+    'watch',
+    function()
+    {
+        /*
+         'echo serving files...',
+         // serve
+         'python -m SimpleHTTPServer 8080',
+         'echo init done.'
+         */
     }
 );
