@@ -107,10 +107,7 @@
          <p>{{description}}</p>
 
          <div>
-            <p>Crafter: {{#link-to 'contact' crafter}}{{crafter.name}}{{/link-to}}</p>
-         </div>
-         <div>
-            {{partial 'reviews'}}
+            {{render 'reviews' reviews}}
          </div>
       </div>
 
@@ -143,11 +140,11 @@
    </div>
 </script>
 
-<script type='text/x-handlebars' data-template-name='_reviews'>
+<script type='text/x-handlebars' data-template-name='reviews'>
    <h3>Reviews</h3>
    <ul>
-      {{#each review in reviews }}
-      <li>{{review.text}}</li>
+      {{#each}}
+      <li>{{text}}</li>
       {{else}}
       <li>
          <p class='text-muted'>
