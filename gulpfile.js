@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var gutil = require('gulp-util');
+var shell = require('gulp-shell')
 
 gulp.task(
     'default',
@@ -10,17 +12,26 @@ gulp.task(
 
 gulp.task(
     'init',
-    function(){
-        // npm install
+    function()
+    {
+        return gulp
+            .src('')
+            .pipe(shell(
+                [
+                    // symlink markdown.js
+                    'ln ./node_modules/markdown/lib/markdown.js ./js/vendor/markdown.js --force',
 
-        // symlink markdown.js
-        // ln ./node_modules/markdown/lib/markdown.js ./js/vendor/markdown.js
+                    // symlink data files; ex: serve localhost:8080/products
+                    'ln ./data/products.json products --force',
+                    'ln ./data/contacts.json contacts --force',
+                    'ln ./data/reviews.json reviews --force',
 
-        // symlink data files; ex: serve localhost:8080/products
-        // ln ./data/products.json products --force
-        // ln ./data/contacts.json contacts --force
-        // ln ./data/reviews.json reviews --force
-
-        // python -m SimpleHTTPServer 8080
+                    // serve
+                    'python -m SimpleHTTPServer 8080'
+                ])
+            );
+        //        gulp.src('node_modules/markdown/lib/markdown.js')
+        //            .pipe(symlink('./js/vendor/markdown.js'))
+        //            .on('error', gutil.log);
     }
 );
