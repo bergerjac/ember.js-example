@@ -18,16 +18,20 @@ gulp.task(
             .src('')
             .pipe(shell(
                 [
+                    'echo symlink-ing vendor libs...',
                     // symlink markdown.js
                     'ln ./node_modules/markdown/lib/markdown.js ./js/vendor/markdown.js --force',
 
+                    'echo symlink-ing data files...',
                     // symlink data files; ex: serve localhost:8080/products
                     'ln ./data/products.json products --force',
                     'ln ./data/contacts.json contacts --force',
                     'ln ./data/reviews.json reviews --force',
 
+                    'echo serving files...',
                     // serve
-                    'python -m SimpleHTTPServer 8080'
+                    'python -m SimpleHTTPServer 8080',
+                    'echo init done.'
                 ])
             );
         //        gulp.src('node_modules/markdown/lib/markdown.js')
