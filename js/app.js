@@ -3,6 +3,7 @@ var App = Ember.Application.create(
         LOG_TRANSITIONS: true
     }
 );
+
 App.Router.map(
     function()
     {
@@ -22,6 +23,48 @@ App.Router.map(
     }
 );
 
+// models
+App.ApplicationAdapter = DS.RESTAdapter.extend();
+App.Product = DS.Model.extend(
+    {
+        title: DS.attr('string'),
+        price: DS.attr('number'),
+        description: DS.attr('string'),
+        isOnSale: DS.attr('boolean'),
+        image: DS.attr('string'),
+        reviews: DS.hasMany('review', { async: true }),
+        crafter: DS.belongsTo('contact', { async: true }),
+        ratings: DS.attr(),
+        rating: function()
+        {
+            return this.get('ratings').reduce(
+                function(previousValue, rating)
+                {
+                    return previousValue + rating;
+                },
+                0) / this.get('ratings').length;
+        }.property('ratings.@each')
+    }
+);
+
+App.Contact = DS.Model.extend(
+    {
+        name: DS.attr('string'),
+        about: DS.attr('string'),
+        avatar: DS.attr('string'),
+        products: DS.hasMany('product', { async: true })
+    }
+);
+
+App.Review = DS.Model.extend(
+    {
+        text: DS.attr('string'),
+        reviewedAt: DS.attr('date'),
+        product: DS.belongsTo('product')
+    }
+);
+
+// controllers
 App.IndexController = Ember.ArrayController.extend(
     {
         productsCount: Ember.computed.alias('length'),
@@ -102,6 +145,7 @@ App.ProductController = Ember.ObjectController.extend(
     }
 );
 
+// routes
 App.IndexRoute = Ember.Route.extend(
     {
         model: function()
@@ -156,6 +200,7 @@ App.ProductsDealsRoute = Ember.Route.extend(
     }
 );
 
+// components
 App.ProductDetailsComponent = Ember.Component.extend(
     {
         reviewsCount: Ember.computed.alias('product.reviews.length'),
@@ -175,42 +220,24 @@ App.ContactDetailsComponent = Ember.Component.extend(
     }
 );
 
-App.ApplicationAdapter = DS.RESTAdapter.extend();
-App.Product = DS.Model.extend(
+// views
+App.ReviewView = Ember.View.extend(
     {
-        title: DS.attr('string'),
-        price: DS.attr('number'),
-        description: DS.attr('string'),
-        isOnSale: DS.attr('boolean'),
-        image: DS.attr('string'),
-        reviews: DS.hasMany('review', { async: true }),
-        crafter: DS.belongsTo('contact', { async: true }),
-        ratings: DS.attr(),
-        rating: function()
+        readMore: Ember.computed.gt('length', 140),
+        isExpanded: false,
+        classNameBindings: ['isExpanded', 'readMore'],
+        click: function(e)
         {
-            return this.get('ratings').reduce(
-                function(previousValue, rating)
-                {
-                    return previousValue + rating;
-                },
-                0) / this.get('ratings').length;
-        }.property('ratings.@each')
+            this.toggleProperty('isExpanded');
+        }
     }
 );
 
-App.Contact = DS.Model.extend(
-    {
-        name: DS.attr('string'),
-        about: DS.attr('string'),
-        avatar: DS.attr('string'),
-        products: DS.hasMany('product', { async: true })
-    }
-);
+// helpers
 
-App.Review = DS.Model.extend(
+Ember.Handlebars.registerBoundHelper(
+    'markdown', function(text)
     {
-        text: DS.attr('string'),
-        reviewedAt: DS.attr('date'),
-        product: DS.belongsTo('product')
+        return new Handlebars.SafeString(markdown.toHTML(text));
     }
 );

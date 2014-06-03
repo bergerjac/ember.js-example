@@ -59,7 +59,7 @@
    </div>
    <div class="row">
       {{#each onSale}}
-      {{product-details product=this classNames='col-sm-4'}}
+         {{product-details product=this classNames='col-sm-4'}}
       {{/each}}
    </div>
 </script>
@@ -71,7 +71,7 @@
       <div class='col-sm-3'>
          <div class='list-group'>
             {{#each}}
-            {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
+               {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
             {{/each}}
          </div>
       </div>
@@ -152,19 +152,25 @@
 
 <script type='text/x-handlebars' data-template-name='reviews'>
    <h3>Reviews</h3>
-   <ul>
+   <ul class="reviews list-unstyled">
       {{#each}}
-      <li>{{text}}</li>
+         {{#view 'App.ReviewView' tag='li' length=text.length}}
+            <div class="content">{{markdown text}}</div>
+            {{#if view.readMore}}
+            <span class="expand text-success">
+               Read {{#if view.isExpanded}}Less{{else}}More{{/if}}
+            </span>
+            {{/if}}
+         {{/view}}
       {{else}}
-      <li>
-         <p class='text-muted'>
-            <em>No reviews yet. Be the first to write one!</em>
-         </p>
-      </li>
+         <li>
+            <p class='text-muted'>
+               <em>No reviews yet. Be the first to write one!</em>
+            </p>
+         </li>
       {{/each}}
    </ul>
 </script>
-
 
 <script type='text/x-handlebars' data-template-name='contacts/index'>
    <h1>About</h1>
@@ -183,9 +189,9 @@
       <div class='col-sm-3'>
          <div class='list-group'>
             {{#each}}
-            {{#link-to 'contact' this classNames='list-group-item'}}
-            {{name}}
-            {{/link-to}}
+               {{#link-to 'contact' this classNames='list-group-item'}}
+               {{name}}
+               {{/link-to}}
             {{/each}}
          </div>
       </div>
@@ -216,6 +222,7 @@
 <script src="js/vendor/handlebars-1.0.0.js"></script>
 <script src="js/vendor/ember-1.3.0.js"></script>
 <script src="js/vendor/ember-data-1.0.0-beta.5.js"></script>
+<script src="js/vendor/markdown.js"></script>
 <script src="js/app.js"></script>
 
 </body>
