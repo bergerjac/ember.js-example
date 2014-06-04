@@ -1,6 +1,8 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var shell = require('gulp-shell')
+var shell = require('gulp-shell');
+var debug = require('gulp-debug');
+var extReplace = require('gulp-ext-replace');
 
 gulp.task(
     'default',
@@ -10,27 +12,34 @@ gulp.task(
     }
 );
 
+gulp.task('deps',
+          function()
+          {
+              console.log('Copying dependency files...');
+              gulp.src('node_modules/markdown/lib/markdown.js')
+                  .pipe(gulp.dest('js/vendor/'));
+              console.log('Copied dependency files.');
+          }
+);
+
+gulp.task('dataFiles',
+          function()
+          {// serve data files in root, without extension
+              console.log('Copying ./data/* to root...');
+              gulp.src('data/*')
+                  .pipe(extReplace(''))
+                  .pipe(gulp.dest('./'));
+              console.log('Copied ./data/* files to root.');
+          }
+);
+
 gulp.task(
     'init',
     function()
     {
-        return gulp
-            .src('')
-            .pipe(shell(
-                [
-                    'echo symlink-ing vendor libs...',
-                    // symlink markdown.js
-                    'ln ./node_modules/markdown/lib/markdown.js ./js/vendor/markdown.js --force',
-
-                    'echo symlink-ing data files...',
-                    // symlink data files; ex: serve localhost:8080/products
-                    'ln ./data/products.json products --force',
-                    'ln ./data/contacts.json contacts --force',
-                    'ln ./data/reviews.json reviews --force',
-
-                    'echo serve the files via: "python -m SimpleHTTPServer 8080"'
-                ])
-            );
+        gulp.start('deps');
+        gulp.start('dataFiles');
+        console.log('serve via: "python -m SimpleHTTPServer 8080"');
     }
 );
 
@@ -38,11 +47,13 @@ gulp.task(
     'watch',
     function()
     {
-        /*
-         'echo serving files...',
-         // serve
-         'python -m SimpleHTTPServer 8080',
-         'echo init done.'
-         */
+        gulp.watch(
+            'data/*',
+            function(event)
+            {
+                console.log('File ' + event.path + ' was ' + event.type + '.');
+                gulp.start('dataFiles');
+            }
+        );
     }
 );

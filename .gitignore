@@ -1,5 +1,16 @@
-# Include your project-specific ignores in this file
-# Read about how to use .gitignore: https://help.github.com/articles/ignoring-files
-bower_components/
+# jetbrains project settings
 .idea/
+
+# bower files
+bower_components/
+
+# vendor files <- npm, bower
+js/vendor/
+
+# npm packages <- npm
 node_modules/
+
+# data files <- ./data/*
+contacts
+products
+reviews

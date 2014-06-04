@@ -18,7 +18,7 @@
             "description": "Easily combustible small sticks or twigs used for starting a fire.",
             "isOnSale": false,
             "image": "images/products/kindling.png",
-            "reviews": [],
+            "reviews": [102],
             "crafter": 201,
             "ratings": [2, 1, 3, 3]
         },
