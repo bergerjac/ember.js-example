@@ -16,7 +16,13 @@ gulp.task('deps',
           function()
           {
               console.log('Copying dependency files...');
-              gulp.src('node_modules/markdown/lib/markdown.js')
+              gulp.src([
+                           'bower_components/ember/ember.js',
+                           'bower_components/ember/ember.js',
+                           'bower_components/ember-data/ember-data.js',
+                           'bower_components/handlebars/handlebars.js',
+                           'bower_components/jquery/jquery.js'
+                       ])
                   .pipe(gulp.dest('js/vendor/'));
               console.log('Copied dependency files.');
           }
