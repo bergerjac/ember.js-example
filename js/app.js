@@ -7,7 +7,6 @@ var App = Ember.Application.create(
 App.Router.map(
     function()
     {
-        this.route('about');
         this.resource('products', function()
                       {
                           this.resource('product', { path: '/:product_id' });
@@ -82,11 +81,7 @@ App.IndexController = Ember.ArrayController.extend(
 App.ContactsIndexController = Ember.Controller.extend(
     {
         contactName: 'Anostagia',
-        avatar: 'images/avatar.png',
-        open: function()
-        {
-            return ((new Date()).getDay() === 0) ? "Closed" : "Open";
-        }.property()
+        avatar: 'images/contacts/patty.png'
     }
 );
 App.ProductsController = Ember.ArrayController.extend(

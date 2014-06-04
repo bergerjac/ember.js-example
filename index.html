@@ -18,9 +18,6 @@
                {{#link-to "index"}}Home{{/link-to}}
             </li>
             <li>
-               {{#link-to "about" activeClass="active"}}About{{/link-to}}
-            </li>
-            <li>
                {{#link-to 'products' activeClass="active"}}Products{{/link-to}}
             </li>
             <li>{{#link-to 'contacts' activeClass="active"}}Contacts{{/link-to}}</li>
@@ -35,7 +32,7 @@
       <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
 
       <p class='pull-right'>
-         {{#link-to "about"}}Credits{{/link-to}}
+         {{#link-to "contacts"}}Credits{{/link-to}}
       </p>
    </footer>
 </script>
@@ -59,7 +56,7 @@
    </div>
    <div class="row">
       {{#each onSale}}
-         {{product-details product=this classNames='col-sm-4'}}
+      {{product-details product=this classNames='col-sm-4'}}
       {{/each}}
    </div>
 </script>
@@ -71,7 +68,7 @@
       <div class='col-sm-3'>
          <div class='list-group'>
             {{#each}}
-               {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
+            {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
             {{/each}}
          </div>
       </div>
@@ -116,7 +113,8 @@
             <p class='text-muted'>{{review.text}}</p>
             {{/if}}
             {{textarea valueBinding='review.text'}}
-            <button {{action 'createReview'}} class='btn-primary'>Review</button>
+            <button
+            {{action 'createReview'}} class='btn-primary'>Review</button>
          </div>
          {{/if}}
       </div>
@@ -154,33 +152,30 @@
    <h3>Reviews</h3>
    <ul class="reviews list-unstyled">
       {{#each}}
-         {{#view 'App.ReviewView' tag='li' length=text.length}}
-            <div class="content">{{markdown text}}</div>
-            {{#if view.readMore}}
+      {{#view 'App.ReviewView' tag='li' length=text.length}}
+      <div class="content">{{markdown text}}</div>
+      {{#if view.readMore}}
             <span class="expand text-success">
                Read {{#if view.isExpanded}}Less{{else}}More{{/if}}
             </span>
-            {{/if}}
-         {{/view}}
+      {{/if}}
+      {{/view}}
       {{else}}
-         <li>
-            <p class='text-muted'>
-               <em>No reviews yet. Be the first to write one!</em>
-            </p>
-         </li>
+      <li>
+         <p class='text-muted'>
+            <em>No reviews yet. Be the first to write one!</em>
+         </p>
+      </li>
       {{/each}}
    </ul>
 </script>
 
 <script type='text/x-handlebars' data-template-name='contacts/index'>
-   <h1>About</h1>
-
-   <p>{{contactName}}</p>
-   <img {{bind-attr src='avatar'}}/>
-   <p>{{open}}</p>
+      <img class="col-sm-6" {{bind-attr src='avatar'}} />
+      <h3 class="col-sm-6">Choose a contact...</h3>
 </script>
 <script type='text/x-handlebars' data-template-name='contacts'>
-   <h1>Contacts</h1>
+   <h2>Contacts</h2>
 
    <div class='row'>
       <div class='col-sm-9'>
@@ -189,9 +184,9 @@
       <div class='col-sm-3'>
          <div class='list-group'>
             {{#each}}
-               {{#link-to 'contact' this classNames='list-group-item'}}
-               {{name}}
-               {{/link-to}}
+            {{#link-to 'contact' this classNames='list-group-item'}}
+            {{name}}
+            {{/link-to}}
             {{/each}}
          </div>
       </div>
