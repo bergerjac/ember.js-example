@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>Flint & Flame</title>
+   <link href="css/bootstrap.css" media="screen" rel="stylesheet"/>
+   <link href="css/main.css" media="screen" rel="stylesheet"/>
+   <link href="css/style.css" media="screen" rel="stylesheet"/>
+   <link href="css/application.css" media="screen" rel="stylesheet"/>
+</head>
+<body>
+<script type='text/x-handlebars' data-template-name='application'>
+   <div class='navbar navbar-default'>
+      <div class='container'>
+         <a href='#' class='navbar-brand'><img src='img/logo.png' alt='logo' height='34' width='224'/></a>
+         <ul class='nav navbar-nav navbar-right'>
+            {{#link-to 'index' tagName='li'}}Home{{/link-to}}
+            {{#link-to 'products' tagName='li'}}Products{{/link-to}}
+            {{#link-to 'contacts' tagName='li'}}Contacts{{/link-to}}
+         </ul>
+      </div>
+   </div>
+   <div class='container'>
+      {{outlet}}
+   </div>
+   <footer class='container'>
+      <hr/>
+      <p class='pull-left'>&copy; 2013 The Flint &amp; Flame</p>
+
+      <p class='pull-right'>
+         {{#link-to "contacts"}}Credits{{/link-to}}
+      </p>
+   </footer>
+</script>
+
+<script type='text/x-handlebars' data-template-name='index'>
+
+   <div class="jumbotron">
+      <h1>Welcome to The Flint &amp; Flame!</h1>
+
+      <p class="tagline">
+         <img {{bind-attr src='logo'}} alt='Logo' />
+              Everything you need to make it through the winter.
+      </p>
+
+      <p>
+         {{#link-to 'products' class='btn btn-primary btn-lg'}}
+         Browse All {{productsCount}} Items &raquo;
+         {{/link-to}}
+      </p>
+
+   </div>
+   <div class="row">
+      {{#each onSale}}
+      {{product-details product=this classNames='col-sm-4'}}
+      {{/each}}
+   </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='products'>
+   <h1>Products</h1>
+
+   <div class='row'>
+      <div class='col-sm-3'>
+         <div class='list-group'>
+            {{#each}}
+            {{#link-to 'product' this classNames='list-group-item'}}{{title}}{{/link-to}}
+            {{/each}}
+         </div>
+      </div>
+      <div class='col-sm-9' style="border-thickness=1">
+         {{outlet}}
+      </div>
+   </div>
+</script>
+<script type="text/x-handlebars" data-template-name='products/index'>
+   <p>Choose a product from the left...</p>
+</script>
+<script type="text/x-handlebars" data-template-name="products/onsale">
+   <ul class='list-unstyled'>
+      {{#each}}
+      <li class='row'>
+         {{product-details product=this tagName='li' classNames='row'}}
+      </li>
+      {{/each}}
+   </ul>
+</script>
+<script type='text/x-handlebars' data-template-name='product'>
+   <div class="row product">
+      <div class="col-md-7">
+         <h2>{{title}}</h2>
+         {{#if isOnSale}}
+         <span {{bind-attr class=":label isOnSale"}} >
+         {{#link-to 'products.onsale'}}View All On Sale{{/link-to}}
+         </span>
+         {{/if}}
+
+         <p class="price">${{price}}</p>
+
+         <p>{{description}}</p>
+
+         <div>
+            {{render 'reviews' reviews}}
+         </div>
+         {{#if isNotReviewed}}
+         <div class="new-review">
+            <h3>Review {{title}}</h3>
+            {{#if text}}
+            <p class='text-muted'>{{review.text}}</p>
+            {{/if}}
+            {{textarea valueBinding='review.text'}}
+            <button
+            {{action 'createReview'}} class='btn-primary'>Review</button>
+         </div>
+         {{/if}}
+      </div>
+
+      <div class='col-md-5'>
+         <img {{bind-attr src='image'}} class='img-thumbnail img-rounded'/>
+      </div>
+   </div>
+</script>
+<script type='text/x-handlebars' data-template-name='components/product-details'>
+   <div class="product-detail">
+      <div class="row">
+         <img {{bind-attr src='product.image'}} class='img-thumbnail col-sm-5'/>
+         <div class='col-sm-7'>
+            <h2>{{product.title}}</h2>
+            {{#if isOnSale}}
+                  <span class="label is-on-sale">
+                  {{#link-to 'products.onsale'}}View All On Sale{{/link-to}}
+                  </span>
+            {{/if}}
+            <p class="product-description">{{product.description}}</p>
+
+            <p>{{#link-to 'product' product class='btn btn-success'}}
+               Buy for ${{product.price}}{{/link-to}}</p>
+            {{#if hasReviews}}
+            <p class='text-muted read-reviews'>Read all reviews ({{reviewsCount}}).</p>
+            {{/if}}
+         </div>
+
+      </div>
+   </div>
+</script>
+
+<script type='text/x-handlebars' data-template-name='reviews'>
+   <h3>Reviews</h3>
+   <ul class="reviews list-unstyled">
+      {{#each}}
+      {{#view 'App.ReviewView' tag='li' length=text.length}}
+      <div class="content">{{markdown text}}</div>
+      {{#if view.readMore}}
+            <span class="expand text-success">
+               Read {{#if view.isExpanded}}Less{{else}}More{{/if}}
+            </span>
+      {{/if}}
+      {{/view}}
+      {{else}}
+      <li>
+         <p class='text-muted'>
+            <em>No reviews yet. Be the first to write one!</em>
+         </p>
+      </li>
+      {{/each}}
+   </ul>
+</script>
+
+<script type='text/x-handlebars' data-template-name='contacts'>
+   <h2>Contacts</h2>
+
+   <div class='row contacts'>
+      <div class='col-sm-9'>
+         {{outlet}}
+      </div>
+      <div class='col-sm-3'>
+         <div class='list-group'>
+            {{#each}}
+            {{#link-to 'contact' this classNames='list-group-item'}}
+            {{name}}
+            {{/link-to}}
+            {{/each}}
+         </div>
+      </div>
+   </div>
+</script>
+<script type='text/x-handlebars' data-template-name='contact'>
+   <div class="row contact">
+      <div class="col-md-3">
+         <h3>{{name}}</h3>
+         <img class='img-thumbnail img-rounded' {{bind-attr src='avatar'}} {{bind-attr alt='name'}} />
+      </div>
+      <div class='col-md-6'>
+         <h3>Story</h3>
+         <p>{{about}}</p>
+      </div>
+      <div class="col-md-3">
+         <h3>Products</h3>
+         <ul>
+            {{#each product in products }}
+            <li>{{#link-to 'product' product}}{{product.title}}{{/link-to}}</li>
+            {{/each}}
+         </ul>
+      </div>
+   </div>
+</script>
+<script type='text/x-handlebars' data-template-name='contacts/index'>
+   <div class="row index">
+      <img class="col-sm-6 avatar" {{bind-attr src='avatar'}} />
+      <h3 class="col-sm-6">Choose a contact...</h3>
+   </div>
+</script>
+
+<script src="js/vendor/jquery.js"></script>
+<script src="js/vendor/handlebars.js"></script>
+<script src="js/vendor/ember.js"></script>
+<script src="js/vendor/ember-data.js"></script>
+<script src="js/vendor/markdown.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+</html>

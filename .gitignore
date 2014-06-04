@@ -1,0 +1,8 @@
+# jetbrains project settings
+.idea/
+
+# bower files
+bower_components/
+
+# npm packages <- npm
+node_modules/
