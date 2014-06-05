@@ -4,6 +4,38 @@ var shell = require('gulp-shell');
 var debug = require('gulp-debug');
 var extReplace = require('gulp-ext-replace');
 
+var jsDeps = 'js/vendor/',
+    distRoot = '_dist/';
+
+var paths =
+{
+    root: './',
+    jsDeps: jsDeps,
+    data: {
+        allFiles: 'data/*'
+    },
+    deps: [
+        'bower_components/ember/ember.js',
+        'bower_components/ember-data/ember-data.js',
+        'bower_components/handlebars/handlebars.js',
+        'bower_components/jquery/jquery.js',
+        'bower_components/markdown/lib/markdown.js'
+    ],
+    dist: {
+        root: distRoot,
+        jsDeps: distRoot + jsDeps,
+        src: [
+            // assets
+            'assets/**/*.*',
+            'css/**/*',
+            'images/**/*.*',
+            'js/app.js',
+            // index
+            'index.html'
+        ]
+    }
+};
+
 gulp.task(
     'default',
     function()
@@ -12,45 +44,31 @@ gulp.task(
     }
 );
 
-function copyDeps(dest)
-{
-    dest = dest || 'js/vendor/';
-    console.log(dest);
-    console.log('Copying dependency files...');
-    gulp.src([
-                 'bower_components/ember/ember.js',
-                 'bower_components/ember-data/ember-data.js',
-                 'bower_components/handlebars/handlebars.js',
-                 'bower_components/jquery/jquery.js',
-                 'bower_components/markdown/lib/markdown.js'
-             ])
-        .pipe(gulp.dest(dest));
-    console.log('Copied dependency files.');
-}
-
-gulp.task('deps',
-          function()
-          {
-              copyDeps();
-          }
+gulp.task(
+    'deps',
+    function()
+    {
+        console.log('Copying dependency files...');
+        gulp.src(paths.deps)
+            .pipe(gulp.dest(paths.jsDeps))
+            .pipe(gulp.dest(paths.dist.jsDeps))
+        ;
+        console.log('Copied dependency files.');
+    }
 );
-
-function copyDataFiles(dest)
-{// serve data files in root, without extension
-    dest = dest || './';
-    console.log(dest);
-    console.log('Copying ./data/* to root...');
-    gulp.src('data/*')
-        .pipe(extReplace(''))
-        .pipe(gulp.dest(dest));
-    console.log('Copied ./data/* files to root.');
-}
 
 gulp.task(
     'dataFiles',
     function()
     {
-        copyDataFiles();
+        // serve data files in root, without extension
+        console.log('Copying data files...');
+        gulp.src(paths.data.allFiles)
+            .pipe(extReplace(''))
+            .pipe(gulp.dest(paths.root))
+            .pipe(gulp.dest(paths.dist.root))
+        ;
+        console.log('Copied data files.');
     }
 );
 
@@ -69,7 +87,7 @@ gulp.task(
     function()
     {
         gulp.watch(
-            'data/*',
+            paths.data.allFiles,
             function(event)
             {
                 console.log('File ' + event.path + ' was ' + event.type + '.');
@@ -85,18 +103,10 @@ gulp.task(
     {
         //gulp.start('init');
         console.log('Copying assets, data, app files...');
-        gulp.src([
-                     // assets
-                     'assets/**/*.*',
-                     'css/**/*',
-                     'images/**/*.*',
-                     'js/app.js',
-                     // index
-                     'index.html'
-                 ], {base: "."})
-            .pipe(gulp.dest('_dist'));
-        copyDeps('_dist/js/vendor');
-        copyDataFiles('_dist/');
+        gulp.src(paths.dist.src, { base: "." })
+            .pipe(gulp.dest(paths.dist.root))
+        ;
+        gulp.start('init');
         console.log('Copied assets, data, app files.');
     }
 );
