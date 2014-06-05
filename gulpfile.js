@@ -12,31 +12,46 @@ gulp.task(
     }
 );
 
+function copyDeps(dest)
+{
+    dest = dest || 'js/vendor/';
+    console.log(dest);
+    console.log('Copying dependency files...');
+    gulp.src([
+                 'bower_components/ember/ember.js',
+                 'bower_components/ember-data/ember-data.js',
+                 'bower_components/handlebars/handlebars.js',
+                 'bower_components/jquery/jquery.js',
+                 'bower_components/markdown/lib/markdown.js'
+             ])
+        .pipe(gulp.dest(dest));
+    console.log('Copied dependency files.');
+}
+
 gulp.task('deps',
           function()
           {
-              console.log('Copying dependency files...');
-              gulp.src([
-                           'bower_components/ember/ember.js',
-                           'bower_components/ember-data/ember-data.js',
-                           'bower_components/handlebars/handlebars.js',
-                           'bower_components/jquery/jquery.js',
-                           'bower_components/markdown/lib/markdown.js'
-                       ])
-                  .pipe(gulp.dest('js/vendor/'));
-              console.log('Copied dependency files.');
+              copyDeps();
           }
 );
 
-gulp.task('dataFiles',
-          function()
-          {// serve data files in root, without extension
-              console.log('Copying ./data/* to root...');
-              gulp.src('data/*')
-                  .pipe(extReplace(''))
-                  .pipe(gulp.dest('./'));
-              console.log('Copied ./data/* files to root.');
-          }
+function copyDataFiles(dest)
+{// serve data files in root, without extension
+    dest = dest || './';
+    console.log(dest);
+    console.log('Copying ./data/* to root...');
+    gulp.src('data/*')
+        .pipe(extReplace(''))
+        .pipe(gulp.dest(dest));
+    console.log('Copied ./data/* files to root.');
+}
+
+gulp.task(
+    'dataFiles',
+    function()
+    {
+        copyDataFiles();
+    }
 );
 
 gulp.task(
@@ -61,5 +76,27 @@ gulp.task(
                 gulp.start('dataFiles');
             }
         );
+    }
+);
+
+gulp.task(
+    'test',
+    function()
+    {
+        //gulp.start('init');
+        console.log('Copying assets, data, app files...');
+        gulp.src([
+                     // assets
+                     'assets/**/*.*',
+                     'css/**/*',
+                     'images/**/*.*',
+                     'js/app.js',
+                     // index
+                     'index.html'
+                 ], {base: "."})
+            .pipe(gulp.dest('_dist'));
+        copyDeps('_dist/js/vendor');
+        copyDataFiles('_dist/');
+        console.log('Copied assets, data, app files.');
     }
 );
